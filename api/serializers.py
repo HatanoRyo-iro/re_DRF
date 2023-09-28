@@ -28,17 +28,17 @@ class BookSerializer(serializers.ModelSerializer):
         }
         
         
-def validate_title(self, value):
-    if "Java" in value:
-        raise serializers.ValidationError("Javaは含めません。")
-    return value
+    def validate_title(self, value):
+        if "Java" in value:
+            raise serializers.ValidationError("Javaは含めません。")
+        return value
 
-def validate(self, data):
-    title = data.get('title')
-    price = data.get('price')
-    if title and '薄い本' in title and price and price > 3000:
-        raise serializers.ValidationError("薄い本は3000円を超えてはいけません。")
-    return data
+    def validate(self, data):
+        title = data.get('title')
+        price = data.get('price')
+        if title and '薄い本' in title and price and price > 3000:
+            raise serializers.ValidationError("薄い本は3000円を超えてはいけません。")
+        return data
 
 
 class BookListSerializer(serializers.ListSerializer):
