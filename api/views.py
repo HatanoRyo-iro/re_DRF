@@ -14,14 +14,10 @@ class BookFilter(filters.FilterSet):
         fields = '__all__'
 
 
-class BookListAPIView(views.APIView):
-    def get(self, request, *args, **kwargs):
-        
-        # モデルオブジェクトをクエリ文字を使ってフィルタリングした結果を取得
-        filterset = BookFilter(request.query_params, queryset=Book.objects.all())
-        if not filterset.is_valid():
-            raise ValidationError(filterset.errors)
-        serializer = BookSerializer(instance=filterset.qs, many=True)
+class BookRetriveAPIView(views.APIView):
+    def get(self, request, pk, *args, **kwargs):
+        book = get_object_or_404(Book, pk=pk)
+        serializer = BookSerializer(instance=book)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 # class BookListCreateAPIView(views.APIView):
