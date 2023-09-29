@@ -14,20 +14,11 @@ class BookFilter(filters.FilterSet):
         fields = '__all__'
 
 
-class BookUpdateAPIView(views.APIView):
-    def put(self, request, pk, *args, **kwargs):
+class BookDestroyAPIView(views.APIView):
+    def delete(self, request, pk, *args, **kwargs):
         book = get_object_or_404(Book, pk=pk)
-        serializer = BookSerializer(instance=book, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
-    
-    def patch(self, request, pk, *args, **kwargs):
-        book = get_object_or_404(Book, pk=pk)
-        serializer = BookSerializer(instance=book, data=request.data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
+        book.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 # class BookListCreateAPIView(views.APIView):
 #     def get(self, request, *args, **kwargs):
