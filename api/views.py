@@ -1,4 +1,4 @@
-from django_filters import rest_framework as filters
+from django_filters import rest_framework as filters, generics
 from rest_framework import status, views
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
@@ -14,11 +14,9 @@ class BookFilter(filters.FilterSet):
         fields = '__all__'
 
 
-class BookDestroyAPIView(views.APIView):
-    def delete(self, request, pk, *args, **kwargs):
-        book = get_object_or_404(Book, pk=pk)
-        book.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+class BookCreateAPIView(generics.CreateAPIView):
+    serializer_class = BookSerializer
+    
 
 # class BookListCreateAPIView(views.APIView):
 #     def get(self, request, *args, **kwargs):
