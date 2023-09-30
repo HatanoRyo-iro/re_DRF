@@ -8,14 +8,11 @@ from .models import Book
 from .serializers import BookSerializer
 
 
-class BookFilter(filters.FilterSet):
-    class Meta:
-        model = Book
-        fields = '__all__'
-
-
-class BookCreateAPIView(generics.CreateAPIView):
+class BookListAPIView(generics.ListAPIView):
+    queryset = Book.objects.all()
     serializer_class = BookSerializer
+    filter_backends = [filters.DjangoFilterBackend]
+    filterset_fields = '__all__'
     
 
 # class BookListCreateAPIView(views.APIView):
