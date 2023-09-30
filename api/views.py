@@ -8,12 +8,20 @@ from .models import Book
 from .serializers import BookSerializer
 
 
+class BookCreateAPIView(generics.CreateAPIView):
+    serializer_class = BookSerializer    
+
+
 class BookListAPIView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     filter_backends = [filters.DjangoFilterBackend]
     filterset_fields = '__all__'
     
+
+class BookRetriveAPIView(generics.RetrieveAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
 
 # class BookListCreateAPIView(views.APIView):
 #     def get(self, request, *args, **kwargs):
