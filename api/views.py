@@ -22,6 +22,12 @@ class BookListAPIView(generics.ListAPIView):
 class BookRetriveAPIView(generics.RetrieveAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    
+
+class BookUpdateAPIView(generics.UpdateAPIview):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    
 
 # class BookListCreateAPIView(views.APIView):
 #     def get(self, request, *args, **kwargs):
