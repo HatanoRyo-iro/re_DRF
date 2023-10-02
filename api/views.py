@@ -1,7 +1,5 @@
-import logging
-
 from django_filters import rest_framework as filters, generics
-from rest_framework import status, views
+from rest_framework import status, views, viewsets
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
@@ -10,16 +8,10 @@ from .models import Book
 from .serializers import BookSerializer
 
 
-logger = logging.getLogger(__name__)
-
-
-class BookCreateAPIView(generics.CreateAPIView):
-    serializer_class = BookSerializer
+class BookViewSet(viewsets.ModelViewSet):
     
-    def create(self, request, *args, **kwargs):
-        response = super().create(request, *args, **kwargs)
-        logger.info("Book(id={})を登録しました。".format(response.data['id']))
-        return response
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
 
 
 # class BookListCreateAPIView(views.APIView):
