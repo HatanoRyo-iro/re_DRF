@@ -20,7 +20,6 @@ from django.urls import path
 from api import views
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
     path('api/books/', views.BookListCreateAPIView.as_view()),
     path('api/books/<pk>/', views.BookRetrieveUpdateDestroyAPIView.as_view()),
 ]
