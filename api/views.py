@@ -1,21 +1,14 @@
-from rest_framework import status, views, generics
-from rest_framework.generics import get_object_or_404
-from rest_framework.response import Response
+from rest_framework import viewsets
+
 
 from .models import Book
 from .serializers import BookSerializer
 
 
-class BookListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Book.objects.all()
+class BookViewSet(viewsets.ModelViewSet):
     serializer_class = BookSerializer
+    queryset = Book.objects.all()
     
-
-class BookRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Book.objects.all()
-    serializer_class = BookSerializer
-
-
 
 # class BookListCreateAPIView(views.APIView):
 #     def get(self, request, *args, **kwargs):
