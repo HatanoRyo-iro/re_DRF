@@ -1,2 +1,2 @@
 # re_DRF
-DRF復習中
+Django REST Frameworkを復習中
